@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { LoadingController, Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { LocationService, UserService } from '../shared/shared';
+import {HomePage, LocationPage, ManageLocationPage} from '../pages/pages';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,15 +15,20 @@ export class MyApp {
   rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
+  locations: any;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, 
+              public statusBar: StatusBar, 
+              public splashScreen: SplashScreen, 
+              public events: Events,
+              public loadingController: LoadingController,
+              public userService: UserService,
+              public locationService: LocationService) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
-    ];
+    this.pages = [];
+    this.locations = [];
 
   }
 
@@ -31,14 +36,49 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      this.fetchLocations();
+
+      this.events.subscribe('locations:changed', () => this.fetchLocations());
+
+       // Enable to debug issues.
+       // window["plugins"].OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+  
+      var notificationOpenedCallback = function(jsonData) {
+        console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+      };
+
+      window["plugins"].OneSignal
+        .startInit("3d2f1378-58e9-4ec5-a184-133ab1924ed4", "17385465587")
+        .handleNotificationOpened(notificationOpenedCallback)
+        .endInit();
+        
     });
   }
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+  fetchLocations(){
+    let loader = this.loadingController.create({
+      content: 'fetching locations...'
+    });
+
+    loader.present();
+    this.locationService.getAllLocations().then(data => {
+        this.locations = data;
+        loader.dismiss();
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
+      });   
+  }
+
+  getLocation(location) {
+    this.nav.push(LocationPage, location)
+  }
+
+  goToSettings(){
+    this.nav.push(ManageLocationPage);
+  }
+
+  logout(){
+    this.userService.logout();
+    this.nav.push(HomePage);
   }
 }

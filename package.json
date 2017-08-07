@@ -1,39 +1,105 @@
 {
-  "name": "wanderlust",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
-  "private": true,
-  "scripts": {
-    "clean": "ionic-app-scripts clean",
-    "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint",
-    "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
-  },
-  "dependencies": {
-    "@angular/common": "4.1.2",
-    "@angular/compiler": "4.1.2",
-    "@angular/compiler-cli": "4.1.2",
-    "@angular/core": "4.1.2",
-    "@angular/forms": "4.1.2",
-    "@angular/http": "4.1.2",
-    "@angular/platform-browser": "4.1.2",
-    "@angular/platform-browser-dynamic": "4.1.2",
-    "@ionic-native/core": "3.10.2",
-    "@ionic-native/splash-screen": "3.10.2",
-    "@ionic-native/status-bar": "3.10.2",
-    "@ionic/storage": "2.0.1",
-    "ionic-angular": "3.3.0",
-    "ionicons": "3.0.0",
-    "rxjs": "5.1.1",
-    "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.11"
-  },
-  "devDependencies": {
-    "@ionic/app-scripts": "1.3.7",
-    "@ionic/cli-plugin-ionic-angular": "1.3.0",
-    "typescript": "2.3.3"
-  },
-  "description": "An Ionic project"
+    "name": "wanderlust",
+    "version": "0.0.1",
+    "author": "Ionic Framework",
+    "homepage": "http://ionicframework.com/",
+    "private": true,
+    "scripts": {
+        "clean": "ionic-app-scripts clean",
+        "build": "ionic-app-scripts build",
+        "lint": "ionic-app-scripts lint",
+        "ionic:build": "ionic-app-scripts build",
+        "ionic:serve": "ionic-app-scripts serve"
+    },
+    "dependencies": {
+        "@angular/common": "4.1.2",
+        "@angular/compiler": "4.1.2",
+        "@angular/compiler-cli": "4.1.2",
+        "@angular/core": "4.1.2",
+        "@angular/forms": "4.1.2",
+        "@angular/http": "4.1.2",
+        "@angular/platform-browser": "4.1.2",
+        "@angular/platform-browser-dynamic": "4.1.2",
+        "@ionic-native/call-number": "^3.12.1",
+        "@ionic-native/contacts": "^3.12.1",
+        "@ionic-native/core": "3.10.2",
+        "@ionic-native/geolocation": "^3.12.1",
+        "@ionic-native/google-maps": "^3.12.1",
+        "@ionic-native/native-geocoder": "^3.12.1",
+        "@ionic-native/sms": "^3.12.1",
+        "@ionic-native/splash-screen": "3.10.2",
+        "@ionic-native/status-bar": "3.10.2",
+        "@ionic-native/text-to-speech": "^3.12.1",
+        "@ionic-native/unique-device-id": "^4.1.0",
+        "@ionic/storage": "^2.0.1",
+        "angular2-google-maps": "^0.17.0",
+        "call-number": "^1.0.1",
+        "cordova-android": "^6.2.3",
+        "cordova-ios": "^4.4.0",
+        "cordova-plugin-add-swift-support": "^1.6.0",
+        "cordova-plugin-compat": "^1.0.0",
+        "cordova-plugin-console": "^1.0.5",
+        "cordova-plugin-contacts": "^2.3.1",
+        "cordova-plugin-device": "^1.1.4",
+        "cordova-plugin-geolocation": "^2.4.3",
+        "cordova-plugin-googlemaps": "^1.4.3",
+        "cordova-plugin-googlemaps-sdk": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk.git",
+        "cordova-plugin-nativegeocoder": "^1.0.2",
+        "cordova-plugin-splashscreen": "^4.0.3",
+        "cordova-plugin-statusbar": "^2.2.2",
+        "cordova-plugin-tts": "^0.2.3",
+        "cordova-plugin-uniquedeviceid": "^1.3.2",
+        "cordova-plugin-whitelist": "^1.3.1",
+        "cordova-sms-plugin": "^0.1.11",
+        "cordova-sqlite-storage": "^2.0.4",
+        "ionic-angular": "3.3.0",
+        "ionic-plugin-keyboard": "^2.2.1",
+        "ionicons": "3.0.0",
+        "mx.ferreyra.callnumber": "~0.0.2",
+        "onesignal-cordova-plugin": "^2.1.2",
+        "rxjs": "5.1.1",
+        "sw-toolbox": "3.6.0",
+        "uuid": "^3.0.1",
+        "zone.js": "0.8.11"
+    },
+    "devDependencies": {
+        "@ionic/app-scripts": "1.3.7",
+        "@ionic/cli-plugin-cordova": "1.4.1",
+        "@ionic/cli-plugin-ionic-angular": "1.3.2",
+        "ionic": "3.6.0",
+        "typescript": "2.3.3"
+    },
+    "description": "An Ionic project",
+    "cordova": {
+        "plugins": {
+            "cordova-plugin-console": {},
+            "cordova-plugin-device": {},
+            "cordova-plugin-splashscreen": {},
+            "cordova-plugin-statusbar": {},
+            "cordova-plugin-whitelist": {},
+            "ionic-plugin-keyboard": {},
+            "cordova-plugin-geolocation": {
+                "GEOLOCATION_USAGE_DESCRIPTION": " "
+            },
+            "cordova-sqlite-storage": {},
+            "cordova-plugin-nativegeocoder": {},
+            "cordova-plugin-contacts": {
+                "CONTACTS_USAGE_DESCRIPTION": " "
+            },
+            "cordova-sms-plugin": {},
+            "mx.ferreyra.callnumber": {},
+            "cordova-plugin-tts": {},
+            "cordova-plugin-uniquedeviceid": {},
+            "cordova-plugin-googlemaps": {
+                "API_KEY_FOR_ANDROID": "AIzaSyCWiOzCkxPJ0yqbmhTiOgiQwRphpoZ_uZQ",
+                "API_KEY_FOR_IOS": "AIzaSyCah7BA4l3Uor7J1-fn0lXRJtXWTIoM51s",
+                "NSLOCATIONWHENINUSEUSAGEDESCRIPTION": "Show your location on the map",
+                "NSLOCATIONALWAYSUSAGEDESCRIPTION": "Trace your location on the map"
+            }
+        },
+        "platforms": [
+            "android",
+            "ios"
+        ]
+    }
 }

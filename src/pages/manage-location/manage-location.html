@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-navbar>
+        <ion-list>
+            <ion-item>
+                <ion-label>Notify Contact When Headout</ion-label>
+                <ion-toggle [(ngModel)]="user.notifyContact" (ionChange)="settingToggled('notifyContact')" checked="false"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Allow contact see your movement</ion-label>
+                <ion-toggle [(ngModel)]="user.watchedByContact" (ionChange)="settingToggled('watchedByCOntact')" checked="false"></ion-toggle>
+            </ion-item>
+        </ion-list>
+
+        <ion-list>
+            <ion-list-header><h2>Saved Locations</h2></ion-list-header>
+            <ion-item *ngFor="let location of locations">
+                <ion-card>
+                    <ion-item>
+                        <ion-icon name="pin" item-start large></ion-icon>
+                        <h2>{{location.name}}</h2>
+                        <p>{{location.address}}</p>
+                    </ion-item>
+
+                    <ion-item>
+                        <button ion-button icon-left clear item-end (click)="locationTapped($event, location)">
+                            <ion-icon name="navigate"></ion-icon>
+                            Start
+                        </button>
+                    </ion-item>
+                </ion-card>
+            </ion-item>
+            
+        </ion-list>
+    </ion-navbar>
+</ion-content>

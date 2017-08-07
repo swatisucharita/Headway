@@ -1,0 +1,16 @@
+.registration-page {
+    #registration-wrapper {
+        width: 100vw;
+        height: 100vh;
+        background: url('../assets/images/background.PNG') no-repeat top left fixed;
+        background-size: cover;
+
+        .registration-form {
+            .form-element {
+                background: transparent;
+                font-size: 14px;
+                color: #fff;
+            }
+        }
+    }
+}

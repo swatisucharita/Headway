@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary" *ngIf="user.id">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -7,12 +7,73 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content padding class="home-page" *ngIf="user.id">
+  <sebm-google-map id="map" [zoom]="15" [latitude]="location.lat" [longitude]="location.lng">
+    <sebm-google-map-marker [latitude]="location.lat" [longitude]="location.lng"></sebm-google-map-marker>
+  </sebm-google-map>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <button id="get-location" ion-button full round color="primary" (click)="findLocation()">
+    SAVE LOCATION
+  </button>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <button id="start-navigation" ion-button full round color="primary" menuToggle>
+    HEAD OUT
+  </button>
+</ion-content> 
+
+<ion-content class="login-page" *ngIf="!user.id">
+  <div class="wrapper">
+    <ion-row>
+       <ion-col col-10 col-center class="fg-white heading">
+         <h3> HEADWAY </h3>
+         <p class="info">Start Your Journey</p>
+       </ion-col>
+    </ion-row>
+    <!--<div class="heading fg-white">
+        <h3> HEADWAY </h3>
+        <p class="info">Start Your Journey</p>
+      </div>-->
+    <div class="login-form" padding>      
+      <form (ngSubmit)="loginUser()" novalidate>
+        {{loginErrors | json }}
+        <ion-list>
+          <ion-item class="form-element" [ngClass]="{'has-error': !!loginErrors.phoneNumber}">
+            <ion-label floating>Phone Number</ion-label>
+            <ion-input name="user.phoneNumber" [(ngModel)]="user.phoneNumber" type="tel"></ion-input>                      
+          </ion-item>
+          <ion-item class="error-container has-error" *ngIf="loginErrors.phoneNumber">
+            <span class="error" color="danger">
+              {{loginErrors.phoneNumber}}
+            </span>
+          </ion-item>
+
+          <ion-item class="form-element" [ngClass]="{'has-error': !!loginErrors.password}">
+            <ion-label floating>Password</ion-label>
+            <ion-input name="user.password" [(ngModel)]="user.password" type="password"></ion-input>
+          </ion-item>
+          <ion-item class="error-container has-error" *ngIf="loginErrors.password">
+            <span class="error" color="danger">
+              {{loginErrors.password}}
+            </span>
+          </ion-item>
+
+          <ion-item class="form-element">
+            <button ion-button round padding (click)="loginUser()">
+              Login
+            </button>
+            <a class="pull-right fg-white" (click)="forgotPassword()">Forgot password</a>
+            <div class="fg-white">
+              <p>Not a member?</p>
+              <a class="pull-right" (click)="signUp()">Sign Up</a>
+            </div>            
+          </ion-item>
+
+           <!--<ion-item class="form-element">
+             <p>Not a member?</p>
+             <a class="pull-right" (click)="signUp()">Sign Up</a>
+          </ion-item>-->
+        </ion-list>
+      </form>      
+    </div>    
+  </div>
 </ion-content>

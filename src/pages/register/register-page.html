@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="registration-page">
+  <div id="registration-wrapper">
+    <p>Welcome to Headway app.</p>
+
+    <div class="registration-form" padding>
+      <form (ngSubmit)="registerUser()">
+        <ion-list>
+          <ion-item class="form-element">
+            <ion-label floating>Phone Number</ion-label>
+            <ion-input name="user.phoneNumber" [(ngModel)]="user.phoneNumber" type="text"></ion-input>
+          </ion-item>
+
+          <ion-item class="form-element">
+            <ion-label floating>Password</ion-label>
+            <ion-input name="user.password" [(ngModel)]="user.password" type="password"></ion-input>
+          </ion-item>
+
+          <ion-item class="form-element">
+            <ion-label floating>Confirm Password</ion-label>
+            <ion-input name="user.confirmPassword" [(ngModel)]="user.confirmPassword" type="password"></ion-input>
+          </ion-item>
+
+          <ion-item class="form-element">
+            <ion-label>Agree to terms & conditions</ion-label>
+            <ion-checkbox name="user.agreesToTerms" [(ngModel)]="user.agreesToTerms" color="primary" [(checked)]="user.agreesToTerms"></ion-checkbox>
+          </ion-item>
+
+          <ion-item class="form-element">
+            <button ion-button round icon-left (click)="registerUser()">
+              <ion-icon name="person-add"></ion-icon>
+              Register
+            </button>
+          </ion-item>
+
+          <ion-item class="form-element">
+             <p>Already have an account?</p>
+             <a class="pull-right" (click)="login()">Login</a>
+          </ion-item>
+        </ion-list>
+    </form>
+      
+    </div>  
+  </div>
+</ion-content>

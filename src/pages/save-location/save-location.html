@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Save Location</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-searchbar 
+        [(ngModel)]="location.query" 
+        [showCancelButton]="true" 
+        (ionInput)="searchLocation()" 
+        (ionCancel)="dismiss()"
+        placeholder="Start typing and select ...">
+    </ion-searchbar>
+    <ion-list>
+        <ion-item *ngFor="let item of autocompleteItems" 
+        (click)="chooseLocation(item)">
+        {{ item.description }}
+        </ion-item>
+    </ion-list>
+
+    <form (ngSubmit)="saveLocation()" id="save-location-form">
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="location.address" name="address" placeholder="Location"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="location.name" name="name" placeholder="Name the location"></ion-input>
+      </ion-item>
+      <button ion-button type="submit">Save</button>
+    </form>
+   
+    <sebm-google-map id="map" [zoom]="15" [latitude]="location.coords.latitude" [longitude]="location.coords.longitude" *ngIf="location.coords.latitude && location.coords.longitude">
+      <sebm-google-map-marker [latitude]="location.coords.latitude" [longitude]="location.coords.longitude"></sebm-google-map-marker>
+    </sebm-google-map>     
+</ion-content>

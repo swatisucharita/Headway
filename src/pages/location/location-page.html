@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>{{location.name}}</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="editLocation()">
+            <ion-icon name="create"></ion-icon>
+        </button>
+        <button ion-button icon-only (click)="goHome()">
+            <ion-icon name="home"></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-badge item-end color="secondary">{{distance}}</ion-badge>
+    <ion-badge item-end color="secondary">{{duration}}</ion-badge>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="location-page" padding>
+    <div #map id="map"></div>
+    <ion-fab mini top mid-right *ngIf="instructions.length > 0">
+        <button ion-fab (click)="showInstructions()">
+            <ion-icon name="list-box"></ion-icon>
+        </button>
+    </ion-fab>
+
+    <ion-fab mini top right *ngIf="instructions.length > 0"> 
+        <button ion-fab  (click)="startNavigation()">
+            <ion-icon name="compass"></ion-icon>
+        </button>
+    </ion-fab>
+
+    <ion-row align-items-space-between>
+        <ion-col col-3>
+            <ion-fab>
+                <button ion-fab>
+                    <ion-icon name="navigate">
+                    </ion-icon>
+                </button>
+                <ion-fab-list side="top">
+                    <button ion-fab (click)="getDirections('DRIVING')" [ngClass]="{'tapped': travelMode === 'DRIVING'}"><ion-icon name="car"></ion-icon></button>
+                    <button ion-fab (click)="getDirections('WALKING')" [ngClass]="{'tapped': travelMode === 'WALKING'}"><ion-icon name="walk"></ion-icon></button>
+                    <button ion-fab (click)="getDirections('TRANSIT')" [ngClass]="{'tapped': travelMode === 'TRANSIT'}"><ion-icon name="bus"></ion-icon></button> 
+                </ion-fab-list>
+            </ion-fab>
+        </ion-col>
+        <ion-col col-3 *ngIf="hasContact()">
+            <ion-fab>
+                <button ion-fab>
+                    <ion-icon name="notifications">
+                    </ion-icon>
+                </button>
+                 <ion-fab-list side="top">
+                    <button ion-fab (click)="textContact()"><ion-icon name="text"></ion-icon></button>
+                    <button ion-fab (click)="callContact()"><ion-icon name="call"></ion-icon></button>
+                </ion-fab-list>
+            </ion-fab>
+        </ion-col>
+        <ion-col col-3>
+            <ion-fab>
+                <button ion-fab  (click)="manageContact()">
+                    <ion-icon name="contact">
+                    </ion-icon>
+                </button>
+            </ion-fab>
+        </ion-col>
+        <ion-col col-3>
+            <ion-fab>
+                <button ion-fab (click)="removeLocation()">
+                    <ion-icon name="trash">
+                    </ion-icon>
+                </button>
+            </ion-fab>
+        </ion-col>
+    </ion-row>
+</ion-content>

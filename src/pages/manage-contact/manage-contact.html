@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>{{contact.id  ? contact.displayName : 'Add Contact'}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-searchbar 
+        [(ngModel)]="location.contactQuery" 
+        [showCancelButton]="true" 
+        (ionInput)="searchContact()" 
+        (ionCancel)="dismiss()"
+        placeholder="Start typing and select ...">
+    </ion-searchbar>
+    <ion-list>
+        <ion-item *ngFor="let item of autocompleteItems" 
+        (click)="chooseContact(item)">
+            {{ item.displayName }}
+            <p *ngFor="let phone of item.phoneNumbers">
+                {{phone.type}}: {{phone.value}}
+            </p>
+        </ion-item>
+    </ion-list>
+
+    <ion-card *ngIf="contact.id">
+        <ion-item>
+            <h2>{{location.name}}</h2>
+            <ion-buttons end>
+                <button ion-button icon-only (click)="notifyNavigator()">
+                    <ion-icon name="text"></ion-icon>
+                </button>
+            </ion-buttons>
+        </ion-item>
+        <ion-card-content>
+            <img  [src]="domSanitizer.bypassSecurityTrustUrl(contact.photos[0].value)"  *ngIf="contact.photos" />
+                <ion-list>
+                    <ion-list-header><h2>{{contact.displayName}}</h2></ion-list-header>
+                    <ion-item *ngFor="let phone of contact.phoneNumbers">
+                        <button ion-button clear color="primary">
+                            <p>{{phone.type}}: {{phone.value}}</p>
+                            <button ion-button (click)="callContact(phone.value)">
+                                <ion-icon name="call" class="pull-right"></ion-icon>
+                            </button>
+                        </button>
+                    </ion-item>               
+                </ion-list>  
+        </ion-card-content>
+    </ion-card>   
+</ion-content>
